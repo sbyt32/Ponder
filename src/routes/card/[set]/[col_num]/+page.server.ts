@@ -5,13 +5,26 @@ export const load = (async ({params}) => {
     
     // Testing w/ Scryfall
     // let post = await fetch(`https://api.scryfall.com/cards/search?q=set:${params.set}+cn:${params.col_num}`, {
-    let post = await fetch(`http://127.0.0.1:8000/price/${params.set}/${params.col_num}?max=25&access=testing`, {
+
+    let priceHistory = await fetch(`http://127.0.0.1:8000/price/${params.set}/${params.col_num}?max=25&access=testing`, {
     headers: {
         'price-access': 'testing',
         'accept': 'application/json'
     }
     })
 
-    post = await post.json()
-    return post
+    priceHistory = await priceHistory.json()
+
+    let saleTable = await fetch(`http://127.0.0.1:8000/sales/card/${params.set}/${params.col_num}?access=testing`, {
+    headers: {
+        'price-access': 'testing',
+        'accept': 'application/json'
+    }
+    })
+
+    saleTable = await saleTable.json()
+    return {
+        price: priceHistory,
+        sale: saleTable
+    }
 }) satisfies PageServerLoad

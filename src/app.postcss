@@ -5,6 +5,7 @@
 
 body::-webkit-scrollbar {
     width: 0.5rem;
+
 }
 
 body::-webkit-scrollbar-track {
@@ -13,4 +14,30 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
     background: #6649b8;
+}
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: .75rem;
+        border-color: black;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        @apply bg-gradient-to-b from-zinc-600 to-gray-300 
+    }
+    
+    .scrollbar::-webkit-scrollbar-thumb {
+        @apply 
+                transition-all
+                ease-in
+                delay-75
+
+                bg-gradient-to-b 
+                from-indigo-600/80
+                via-indigo-500/80
+                to-purple-600/80
+                hover:bg-gradient-to-b 
+                hover:from-indigo-600
+                hover:to-fuchsia-600/60;
+    }
+
 }

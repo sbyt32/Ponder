@@ -1,4 +1,4 @@
 
 <a href="/">
-    <img src="/house.svg" width=10% height=10% class="mx-auto" alt="Home">
+    <img src="/frank.png" width=15% height=15% class="mx-auto shadow-lg shadow-black" alt="Home">
 </a>
