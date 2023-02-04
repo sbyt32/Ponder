@@ -4,7 +4,7 @@ export const options = {
     plugins: {
         tooltip: {
             callbacks: {
-                label: function() {
+                label: function(context) {
                     let label = context.dataset.label || '';
 
                     if (label){
@@ -19,10 +19,14 @@ export const options = {
                     }
                     return label;
                 }
-            }
+            },
+            intersect: false
+        },
+        title: {
+            display: true,
+            text: 'Price History'
         },
         legend: {
-            position: 'bottom',
             display: false
         },
         htmlLegend: {
@@ -34,12 +38,9 @@ export const options = {
     },
     scales: {
         x: {
-            time: {
-                tooltipFormat: 'DD T'
-            },
             title: {
                 display: true,
-                text: 'value'
+                text: 'Date'
             }
         },
         y: {

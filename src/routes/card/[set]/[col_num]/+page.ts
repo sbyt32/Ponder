@@ -2,8 +2,9 @@ interface RootMessage  {
     price: {
       name: string,
       set: string,
+      set_full: string,
       id: string,
-      price_history: [{
+      data: [{
         date: string,
         usd: number,
         usd_foil: number,

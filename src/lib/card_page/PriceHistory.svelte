@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
     import { onMount } from 'svelte';
-    import { regionVal, shopInfo } from '$lib/region_data';
+    import  regionVal, { shopInfo } from '$lib/shared/stores/region_data';
     import { options } from '$lib/card_page/chartOptions.js';
     import { htmlLegendPlugin } from '$lib/card_page/plugin.js'
     import { Line } from 'svelte-chartjs';
@@ -88,13 +88,13 @@ function parsePriceData(price_data) {
 
 
 
-    for (let i = 0; i < price_data.price_history.length; i++) {
-            labels.push(price_data.price_history[i].date);
-            datasets[0].data.push(price_data.price_history[i].usd)
-            datasets[1].data.push(price_data.price_history[i].usd_foil)
-            datasets[2].data.push(price_data.price_history[i].euro)
-            datasets[3].data.push(price_data.price_history[i].euro_foil)
-            datasets[4].data.push(price_data.price_history[i].tix)
+    for (let i = 0; i < price_data.data.length; i++) {
+            labels.push(price_data.data[i].date);
+            datasets[0].data.push(price_data.data[i].prices.usd)
+            datasets[1].data.push(price_data.data[i].prices.usd_foil)
+            datasets[2].data.push(price_data.data[i].prices.euro)
+            datasets[3].data.push(price_data.data[i].prices.euro_foil)
+            datasets[4].data.push(price_data.data[i].prices.tix)
     }
 
     for (let i = 0; i < datasets.length; i++) {
@@ -145,7 +145,7 @@ function parsePriceData(price_data) {
             }, 900);
         }
 
-        chart.update();
+        // chart.update();
 
         
     }
@@ -157,10 +157,7 @@ function parsePriceData(price_data) {
     $: {setPrice(chart, $regionVal)}
 
 </script>
-<div id="legend-container">
-
+<div id="legend-container" class="pt-3">
 </div>
 
 <Line data={parsePriceData(data)} options={options} bind:chart plugins={[htmlLegendPlugin]}/>
-<!-- <Line data={parsePriceData(data)} options={options} bind:chart/> -->
-<!-- <button on:click={() => onClick()}> hi</button> -->

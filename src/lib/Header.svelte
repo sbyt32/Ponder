@@ -1,18 +1,16 @@
 <script lang="ts">
-	import '../app.postcss';
+	// import '../app.postcss';
 	import Icon from '$lib/Logo.svelte'
 	import { goto } from '$app/navigation';
-	import { regionVal, shopInfo } from '$lib/region_data.js';
-
-	let regionChoice = 0
+	import regionVal, { shopInfo } from '$lib/shared/stores/region_data';
 
 	export function onKeyPress(e: KeyboardEvent, str: string) {
 		if (e.code === 'Enter') goto(`/search/${str}`);
 	}
 
 	let searchQuery = '';
-	function log_var(region: number) {
-		regionVal.update(shop => region)
+	function log_var(region: string) {
+		regionVal.set(region)
 		console.log($regionVal);
 }
 </script>
@@ -62,11 +60,13 @@
 		border-transparent
 		focus:border-gray-500 focus:bg-white focus:ring-0
 	  	"
-		bind:value={regionChoice}
-		on:change={() => log_var(regionChoice)}
+		bind:value={$regionVal}
+		on:change={() => log_var($regionVal)}
 	>
-		<option value=0 selected>🇺🇸</option>
+		<option value=0>🇺🇸</option>
 		<option value=1>🇪🇺</option>
 	</select>
 </div>
 
+<!-- 		on:change={() => log_var(regionChoice)}
+ -->

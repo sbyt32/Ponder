@@ -48,7 +48,8 @@ export const htmlLegendPlugin = {
         li.style.display = 'flex';
         li.style.flexDirection = 'row';
         li.style.marginLeft = '10px';
-        li.classList.add()  
+        li.style.transitionDelay = 200;
+        li.classList.add()
 
         li.onclick = () => {
           const {type} = chart.config;

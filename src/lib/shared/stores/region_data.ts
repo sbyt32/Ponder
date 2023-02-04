@@ -1,3 +1,4 @@
+import { browser } from "$app/environment";
 import { writable } from "svelte/store";
 
 export let shopInfo = [
@@ -42,7 +43,7 @@ export let shopInfo = [
         shop: "Cardhoarder",
         link: "https://www.cardhoarder.com/cards?affiliate_id=scryfall&data%5Bsearch%5D=",
         short: "cardhoarder",
-        locale: "tix",
+        locale: "en-US",
         currency: "TIX",
         colors: {
             rgb: {
@@ -57,4 +58,15 @@ export let shopInfo = [
     } 
 ]
 
-export const regionVal = writable(0);
+const defaultValue = '0';
+const initialValue = browser ? window.localStorage.getItem('regionVal') ?? defaultValue : defaultValue;
+
+const regionVal = writable<string>(initialValue);
+
+regionVal.subscribe((value) => {
+    if (browser) {
+        window.localStorage.setItem('regionVal', value)
+    }
+});
+
+export default regionVal;
