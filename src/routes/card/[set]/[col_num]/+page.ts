@@ -25,6 +25,6 @@ interface RootMessage  {
   }
 }
 
-export async function load( {data} : {data: RootMessage}) {        
+export async function load( {data} : {data: RootMessage}) {
     return data
 }
